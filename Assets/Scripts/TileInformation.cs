@@ -30,6 +30,16 @@ public class TileInformation : MonoBehaviour
         sprite.sprite = tileHighlights[index];
     }
 
+    /** Sets the X and Z position to be called when generating the playfield
+	 * 
+	 * @param _xPosition 
+     * @param _zPosition - Pass in the coordinates
+	 */
+    public void SetTileData(int _xPosition, int _zPosition){
+        xPosition = _xPosition;
+        zPosition = _zPosition;
+    }
+
     // Reacts when mouse hovers over tile and calls method to show crosshair
     void OnMouseOver(){
         HighlightActivate(1);
