@@ -32,7 +32,7 @@ public class TileInformation : MonoBehaviour
 
     /** Sets the X and Z position to be called when generating the playfield
 	 * 
-	 * @param _xPosition 
+	 * @param _xPosition  - Setter
      * @param _zPosition - Pass in the coordinates
 	 */
     public void SetTileData(int _xPosition, int _zPosition){
