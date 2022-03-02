@@ -75,6 +75,7 @@ public class PlaceManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && canPlace)
             {
                 // Place spaceship
+                DeploySpaceship();
             }
 
             if (Input.GetMouseButtonDown(1))
@@ -154,8 +155,26 @@ public class PlaceManager : MonoBehaviour
     }
 
     // Rotate 90 degrees
-    void RotateSpaceship(){
+    void RotateSpaceship()
+    {
         spaceshipList[currentSpaceship].spaceshipGhost.transform.localEulerAngles += new Vector3(0, 90f, 0);
+    }
+
+    // Deploys spaceship on grid
+    void DeploySpaceship()
+    {
+        // Takes current hitpoint and rounds vector to position
+        Vector3 position = new Vector3(Mathf.Round(hitPoint.x), 0, Mathf.Round(hitPoint.z));
+        Quaternion rotation = spaceshipList[currentSpaceship].spaceshipGhost.transform.rotation;
+        GameObject nuShip = Instantiate(spaceshipList[currentSpaceship].spaceshipPrefab, position, rotation);
+
+        // Update grid
+
+        //  Deactivate deployment
+
+        // Deactivate all ghosts
+
+        // Check if all spaceships are placed
     }
 
 }
