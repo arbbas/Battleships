@@ -14,6 +14,7 @@ public class CraftBehaviour : MonoBehaviour
     public int spaceshipLength;
     // Tracks hits on spaceship
     int hitCount;
+    public OccupationType type;
 
     void Start()
     {
