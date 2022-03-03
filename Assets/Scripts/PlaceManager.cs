@@ -40,7 +40,7 @@ public class PlaceManager : MonoBehaviour
     public List<SpaceshipsToPlace>
         spaceshipList = new List<SpaceshipsToPlace>();
 
-    int currentSpaceship = 3;
+    int currentSpaceship = 0;
 
     // Performs raycast
     RaycastHit hit;
@@ -52,7 +52,7 @@ public class PlaceManager : MonoBehaviour
     void Start()
     {
         ShipGhostActivation(1);
-        ShipGhostActivation(currentSpaceship);
+        //ShipGhostActivation(currentSpaceship);
     }
 
     // Update is called once per frame
@@ -170,11 +170,40 @@ public class PlaceManager : MonoBehaviour
 
         // Update grid
 
+        //Update placed amount of the current Spaceship
+        spaceshipList[currentSpaceship].placedAmount++;
         //  Deactivate deployment
-
+        isPlacing = false;
         // Deactivate all ghosts
-
+        ShipGhostActivation(-1); //passes in a negative index to deactivate this
         // Check if all spaceships are placed
     }
 
+    /// <summary>
+    /// This function is to address the behaviour of the ship selection buttons and ties in with ghost behaviour
+    /// </summary>
+    /// <param name="index"></param>
+    public void PlacingSpaceshipsButton(int index)
+    {
+        //makes sure if the ship has been placed
+        if (AllSpaceshipsPlaced(index))
+        {
+            //if ships have not been placed, no return
+            print("No more Spaceships to place");
+            return;
+        }
+
+        //Activating SpaceShipGhost
+        currentSpaceship = index;
+        ShipGhostActivation(currentSpaceship);
+        isPlacing = true; //activating is placing
+
+    }
+
+    bool AllSpaceshipsPlaced(int index)
+    {
+        //if placed amount is not the same as noToPlace return true so we can place ship
+        return spaceshipList[index].placedAmount == spaceshipList[index].noToPlace; 
+        
+    }
 }

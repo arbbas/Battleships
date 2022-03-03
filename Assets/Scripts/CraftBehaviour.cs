@@ -10,7 +10,7 @@ using UnityEngine;
  */
 public class CraftBehaviour : MonoBehaviour
 {
-    // int to determine ship damage
+    // int to determine ship damage 
     public int spaceshipLength;
     // Tracks hits on spaceship
     int hitCount;
