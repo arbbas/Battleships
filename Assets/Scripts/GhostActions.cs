@@ -40,7 +40,7 @@ public class GhostActions : MonoBehaviour
     {
         info = GetTileInformation();
 
-        if (info != null)
+        if (info != null && !GameManager.instance.IsOccupied(info.xPosition, info.zPosition))
         {
             // Check if tile is occupied
             return true;
@@ -52,7 +52,7 @@ public class GhostActions : MonoBehaviour
     }
 
     /** Sets the currect playfield in GhostACtions to stop unathorised access to opponent playfield. 
-	 * 
+	 * AB - must be public for the game manager as accessing this as component
      * @return hit.collider.GetComponent<TileInformation>() - Return info of the tile being checked.
 	 */
     public TileInformation GetTileInformation()
