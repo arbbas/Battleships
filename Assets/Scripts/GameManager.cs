@@ -72,10 +72,67 @@ public class GameManager : MonoBehaviour
         //loop through all the child components of ship transform and get information about their tile info
         foreach(Transform child in shipTransform)
         {
-            TileInformation tileInfo = child.GetComponent<GhostActions>().GetTileInformation();
+            TileInformation tileInfo = child.GetComponent<GhostActions>().GetTileInformation(); //updates tile array
             players[playerTurn].grid[tileInfo.xPosition, tileInfo.zPosition] = new Tile(ship.type, ship);
         }
+
+        AddSpaceshipToSpaceshipList(placedship);
+        DebuggingGrid();
     }
-        
+
+    /// <summary>
+    /// Create string of information about OccupationTypes and loop through grid to check for information 
+    /// </summary>
+    ///
+
+    public bool IsOccupied(int xpos, int zpos)
+    {
+        return players[playerTurn].grid[xpos, zpos].IsBeingOccupied();
+    }
+
+    void DebuggingGrid()
+    {
+        string s = "";
+        int seperator = 0; //see between lines if something has been added (visual aid)
+        for (int i = 0; i < 10; i++) // x axis
+        {
+            s += " - "; // seperates the strings
+            for (int y = 0; y < 10; y++)// y axis
+            {
+                string type = "0"; //Occupation Type
+                if(players[playerTurn].grid[i,y].type == OccupationType.BATTLESHIP)
+                {
+                    type = "Bat";   
+                }
+                if (players[playerTurn].grid[i, y].type == OccupationType.CARRIER)
+                {
+                    type = "Car";
+                }
+                if (players[playerTurn].grid[i, y].type == OccupationType.CORVETTE)
+                {
+                    type = "Cor";
+                }
+                if (players[playerTurn].grid[i, y].type == OccupationType.CRUISER)
+                {
+                    type = "Cru";
+                }
+                if (players[playerTurn].grid[i, y].type == OccupationType.DESTROYER)
+                {
+                    type = "Des";
+                }
+
+                s += type;
+                seperator = y % 10;
+                if(seperator == 9)
+                {
+                    s += " - ";
+                }
+            }
+
+            s += "\n";
+        }
+
+        print(s);
+    }
 }
 

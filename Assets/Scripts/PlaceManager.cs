@@ -169,7 +169,8 @@ public class PlaceManager : MonoBehaviour
         GameObject nuShip = Instantiate(spaceshipList[currentSpaceship].spaceshipPrefab, position, rotation);
 
         // Update grid
-
+        // Takes all child transform information from the game manager and takes ghost array to update grid, nuShip brought over to game manager
+        GameManager.instance.UpdatesGrid(spaceshipList[currentSpaceship].spaceshipGhost.transform, nuShip.GetComponent<CraftBehaviour>(), nuShip);
         //Update placed amount of the current Spaceship
         spaceshipList[currentSpaceship].placedAmount++;
         //  Deactivate deployment

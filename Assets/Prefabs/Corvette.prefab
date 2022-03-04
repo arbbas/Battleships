@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5251397200806691518}
   - component: {fileID: 1669286966023734432}
   m_Layer: 0
-  m_Name: Submarine
+  m_Name: Corvette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,3 +97,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spaceshipLength: 3
+  type: 1
