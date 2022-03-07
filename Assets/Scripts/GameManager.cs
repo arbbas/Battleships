@@ -134,5 +134,39 @@ public class GameManager : MonoBehaviour
 
         print(s);
     }
+
+    /// <summary>
+    /// Method for deleting all ships that are currently placed on the board.
+    /// Used for the 'reset' button during deployment phase.
+    /// </summary>
+    public void DestroyAllShips()
+    {
+        foreach(GameObject ship in players[playerTurn].placedSpaceshipList)
+        {
+            Destroy(ship);
+        }
+        players[playerTurn].placedSpaceshipList.Clear();
+
+        InitGrid();
+    }    
+
+    /// <summary>
+    /// Method for reinitialising the board.
+    /// Used after deleting ships from the grid using the Reset button
+    /// </summary>
+    void InitGrid()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                OccupationType t = OccupationType.EMPTY;
+                players[playerTurn].grid[i, j] = new Tile(t, null);
+
+
+            }
+        }
+    }
+
 }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /**
  * Placing behaviour for spaceships
@@ -32,6 +33,8 @@ public class PlaceManager : MonoBehaviour
 
         public int noToPlace = 1;
 
+        public Text amountStart;
+
         [HideInInspector]
         public int placedAmount = 0;
     }
@@ -51,6 +54,8 @@ public class PlaceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UpdateAmountText();
+
         ShipGhostActivation(1);
         //ShipGhostActivation(currentSpaceship);
     }
@@ -178,6 +183,9 @@ public class PlaceManager : MonoBehaviour
         // Deactivate all ghosts
         ShipGhostActivation(-1); //passes in a negative index to deactivate this
         // Check if all spaceships are placed
+
+        // Update the UI display of how many ships are left to be placed.
+        UpdateAmountText();
     }
 
     /// <summary>
@@ -206,5 +214,30 @@ public class PlaceManager : MonoBehaviour
         //if placed amount is not the same as noToPlace return true so we can place ship
         return spaceshipList[index].placedAmount == spaceshipList[index].noToPlace; 
         
+    }
+
+    /// <summary>
+    /// Method for updating the UI display of the amount of ships to lace. 
+    /// </summary>
+    void UpdateAmountText()
+    {
+        for (int i = 0; i < spaceshipList.Count; i++)
+        {
+            spaceshipList[i].amountStart.text = (spaceshipList[i].noToPlace - spaceshipList[i].placedAmount).ToString();
+        }
+    }
+
+    /// <summary>
+    /// Method called from the clear button to delete all placed ships.
+    /// </summary>
+    public void ClearAllShips()
+    {
+        GameManager.instance.DestroyAllShips();
+        
+        foreach( var ship in spaceshipList)
+        {
+            ship.placedAmount = 0;
+        }
+        UpdateAmountText();
     }
 }
