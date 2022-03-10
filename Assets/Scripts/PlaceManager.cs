@@ -6,11 +6,16 @@ using UnityEngine.UI;
 /**
  * Placing behaviour for spaceships
  * 
+ * @reference - basic game code is adapted from Udemy tutorial 'Battleships 3D', available at: https://www.udemy.com/course/unity-game-tutorial-battleships-3d/ 
+ * 
  * @author Enigma Studios
- * @version 01-03-2022
+ * @version 10-03-2022
  */
 public class PlaceManager : MonoBehaviour
 {
+    //Access point for the placing manager. 
+    public static PlaceManager instance;
+
     // Activate or deactivates the placing mode
     public bool isPlacing;
 
@@ -22,6 +27,9 @@ public class PlaceManager : MonoBehaviour
 
     // Only checks tiles
     public LayerMask layerChecker;
+
+    // Reference to the ready button.
+    public Button readyButton;
 
     // Contains the spaceship ghosts and prefabs to pass to the playfield.
     [System.Serializable]
@@ -51,14 +59,48 @@ public class PlaceManager : MonoBehaviour
     // Vector Position where hit
     Vector3 hitPoint;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Called before start.
+    /// Makes this place manager the publicly exposed.
+    /// </summary>
+    private void Awake()
+    {
+        instance = this;
+    }
+
+
+
+
+    /// <summary>
+    /// Before the first frame:
+    /// text displaying amount of ships to place is updated
+    /// ghost ship is activated
+    /// 'ready' button is set to inactive
+    /// </summary>
     void Start()
     {
         UpdateAmountText();
 
         ShipGhostActivation(1);
         //ShipGhostActivation(currentSpaceship);
+
+        readyButton.interactable = false;
     }
+
+    /// <summary>
+    /// Method for determining which board the player can place their ships on. 
+    /// Sets the ready button to inactive when first invoked
+    /// And resets the ships in the placedShip list (as player 2 has not placed anything yet!)
+    /// </summary>
+    /// <param name="playfield"></param>
+    public void SetPlayfield(PhysicalPlayfield playfield)
+    {
+        this.playfield = playfield;
+        readyButton.interactable = false;
+
+        ClearAllShips();
+    }
+    
 
     // Update is called once per frame
     void Update()
@@ -73,6 +115,12 @@ public class PlaceManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerChecker))
             {
                 // Check if the tile is on correct playfield
+                if(!playfield.RequestTile(hit.collider.GetComponent<TileInformation>()))
+                {
+                    return;
+                }
+
+
                 // return
                 hitPoint = hit.point;
             }
@@ -176,13 +224,18 @@ public class PlaceManager : MonoBehaviour
         // Update grid
         // Takes all child transform information from the game manager and takes ghost array to update grid, nuShip brought over to game manager
         GameManager.instance.UpdatesGrid(spaceshipList[currentSpaceship].spaceshipGhost.transform, nuShip.GetComponent<CraftBehaviour>(), nuShip);
+
         //Update placed amount of the current Spaceship
         spaceshipList[currentSpaceship].placedAmount++;
+
         //  Deactivate deployment
         isPlacing = false;
+
         // Deactivate all ghosts
         ShipGhostActivation(-1); //passes in a negative index to deactivate this
+
         // Check if all spaceships are placed
+        AllSpaceshipsPlaced();
 
         // Update the UI display of how many ships are left to be placed.
         UpdateAmountText();
@@ -214,6 +267,25 @@ public class PlaceManager : MonoBehaviour
         //if placed amount is not the same as noToPlace return true so we can place ship
         return spaceshipList[index].placedAmount == spaceshipList[index].noToPlace; 
         
+    }
+
+    /// <summary>
+    /// Method for checking if a player has placed all their ships. 
+    /// Used to activate the 'ready' button to switch control to player 2.
+    /// </summary>
+    /// <returns> boolean value </returns>
+    bool AllSpaceshipsPlaced()
+    {
+        foreach (var ship in spaceshipList)
+        {
+            if (ship.placedAmount != ship.noToPlace)
+            {
+                return false;
+            }
+        }
+
+        readyButton.interactable = true;
+        return true;
     }
 
     /// <summary>

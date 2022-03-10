@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * @reference - basic game code is adapted from Udemy tutorial 'Battleships 3D', available at: https://www.udemy.com/course/unity-game-tutorial-battleships-3d/ 
+
+ * @version 10-03-2020
+ * @author Enigma Studios
+ * 
+ */
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -47,9 +54,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     int playerTurn; //variable to use for keep track whether it is player 1 or 2s go
     //creates two players immediately when game spins up
     public Player[] players = new Player[2];
+
+    /// <summary>
+    /// When start is called, tell the placing manager which board the player is allowed to put their ships on.
+    /// </summary>
+    private void Start()
+    {
+        PlaceManager.instance.SetPlayfield(players[playerTurn].physicalPlayfield);
+        
+    }
+
+
+
 
     /// <summary>
     /// Function to add the ships into the list 

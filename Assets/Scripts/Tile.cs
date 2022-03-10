@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Types of tile states
-/// </summary>
+/**
+ * @reference - basic game code is adapted from Udemy tutorial 'Battleships 3D', available at: https://www.udemy.com/course/unity-game-tutorial-battleships-3d/ 
+ * @version - 10-03-2022
+ * @author - Enigma Studios
+ */
 public enum OccupationType
 {
     EMPTY,

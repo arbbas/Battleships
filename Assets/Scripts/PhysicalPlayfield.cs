@@ -5,9 +5,10 @@ using UnityEngine;
 /**
  * Script to automate placing tiles. Can configure for desired board size in future game modes.
  * Default is 10x10
- *
+ * @reference - basic game code is adapted from Udemy tutorial 'Battleships 3D', available at: https://www.udemy.com/course/unity-game-tutorial-battleships-3d/ 
+
  * @author Enigma Studios
- * @version 01-03-2022
+ * @version 10-03-2022
  */
 public class PhysicalPlayfield : MonoBehaviour
 {
@@ -19,6 +20,46 @@ public class PhysicalPlayfield : MonoBehaviour
 
     // Stores prefabs
     List<GameObject> tileList = new List<GameObject>();
+
+    // List containing all the tile information for tiles in this playfield.
+    List<TileInformation> tileInfoList = new List<TileInformation>();
+
+    /// <summary>
+    /// On starting, the playfield gets given information about what tiles it contains
+    /// </summary>
+    private void Start()
+    {
+        tileList.Clear();
+        tileInfoList.Clear();
+
+        foreach (Transform item in transform)
+        {
+            if (item != transform)
+            {
+                tileList.Add(item.gameObject);
+            }
+        }
+
+        foreach (GameObject item in tileList)
+        {
+            if (item != transform)
+            {
+                tileInfoList.Add(item.GetComponent<TileInformation>());
+            }
+        }
+    }
+
+    /// <summary>
+    /// Method to check if a tile is in this playfield or not.
+    /// Used to prevent players placing ships on the opponents playfield.
+    /// </summary>
+    /// <param name="info"></param>
+    /// <returns>true if tile is contained, otherwise false</returns>
+    public bool RequestTile(TileInformation info)
+    {
+        return (tileInfoList.Contains(info));
+    }
+
 
     // Fill list when fill bool is activated
     void OnDrawGizmos()
