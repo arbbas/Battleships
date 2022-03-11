@@ -9,7 +9,7 @@ using UnityEngine.UI;
  * @reference - basic game code is adapted from Udemy tutorial 'Battleships 3D', available at: https://www.udemy.com/course/unity-game-tutorial-battleships-3d/ 
  * 
  * @author Enigma Studios
- * @version 10-03-2022
+ * @version 11-03-2022
  */
 public class PlaceManager : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class PlaceManager : MonoBehaviour
     public static PlaceManager instance;
 
     // Activate or deactivates the placing mode
-    public bool isPlacing;
+    bool isPlacing;
 
     // Checks if tile is available
     bool canPlace;
