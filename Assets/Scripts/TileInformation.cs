@@ -4,7 +4,8 @@ using UnityEngine;
 
 /**
  * Script to process and control behaviour of the tile
- * 
+ * @reference - basic game code is adapted from Udemy tutorial 'Battleships 3D', available at: https://www.udemy.com/course/unity-game-tutorial-battleships-3d/ 
+
  * @author Enigma Studios
  * @version 01-03-2022
  */

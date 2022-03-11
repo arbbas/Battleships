@@ -4,7 +4,8 @@ using UnityEngine;
 
 /**
  * Controls the behaviour of spaceship silhouettes
- * 
+ * @reference - basic game code is adapted from Udemy tutorial 'Battleships 3D', available at: https://www.udemy.com/course/unity-game-tutorial-battleships-3d/ 
+
  * @author Enigma Studios
  * @version 02-03-2022
  */
