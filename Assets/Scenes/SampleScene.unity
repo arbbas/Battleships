@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3606,6 +3606,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &163603472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 163603473}
+  m_Layer: 0
+  m_Name: "P2\uF739CamPos "
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &163603473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163603472}
+  m_LocalRotation: {x: 0.51840013, y: 0, z: 0, w: 0.8551382}
+  m_LocalPosition: {x: 7.02, y: 8.3, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 62.45, y: 0, z: 0}
 --- !u!1 &164435676
 GameObject:
   m_ObjectHideFlags: 0
@@ -4954,7 +4985,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 0
     placedSpaceshipList: []
-    camPosition: {fileID: 0}
+    camPosition: {fileID: 1789616659}
     placePanel: {fileID: 1128748438}
     shootPanel: {fileID: 814405701}
   - playerType: 0
@@ -4963,11 +4994,12 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 0
     placedSpaceshipList: []
-    camPosition: {fileID: 0}
+    camPosition: {fileID: 163603472}
     placePanel: {fileID: 514654090}
     shootPanel: {fileID: 724104271}
-  gameState: 0
-  battleCamera: {fileID: 0}
+  gameState: 3
+  battleCamera: {fileID: 1815744983}
+  placingCanvas: {fileID: 826650977}
 --- !u!1 &279051680
 GameObject:
   m_ObjectHideFlags: 0
@@ -10904,7 +10936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.254486, y: 9.254501}
+  m_AnchoredPosition: {x: 9.254517, y: 9.254517}
   m_SizeDelta: {x: 92.6931, y: 330.6931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &514654092
@@ -14874,7 +14906,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.254486, y: 9.254501}
+  m_AnchoredPosition: {x: 9.254517, y: 9.254517}
   m_SizeDelta: {x: 92.6931, y: 330.6931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &724104273
@@ -16943,7 +16975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.254486, y: 9.254501}
+  m_AnchoredPosition: {x: 9.254517, y: 9.254517}
   m_SizeDelta: {x: 92.6931, y: 330.6931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &814405703
@@ -20462,14 +20494,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.51840013, y: 0, z: 0, w: 0.8551382}
-  m_LocalPosition: {x: -4, y: 8.3, z: -1}
+  m_LocalRotation: {x: 0.6205005, y: -0, z: -0, w: 0.7842061}
+  m_LocalPosition: {x: -0.11, y: 12.87, z: 1.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 62.45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 76.705, y: 0, z: 0}
 --- !u!1 &974262102
 GameObject:
   m_ObjectHideFlags: 0
@@ -23448,9 +23480,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 399896207}
-        m_TargetAssemblyTypeName: PlaceManager, Assembly-CSharp
-        m_MethodName: ClearAllShips
+      - m_Target: {fileID: 276256565}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: EndDeploymentPhase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23739,7 +23771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.254486, y: 9.254501}
+  m_AnchoredPosition: {x: 9.254517, y: 9.254517}
   m_SizeDelta: {x: 92.6931, y: 330.6931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1128748440
@@ -39444,6 +39476,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1789616659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1789616660}
+  m_Layer: 0
+  m_Name: P1CamPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1789616660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789616659}
+  m_LocalRotation: {x: 0.51840013, y: 0, z: 0, w: 0.8551382}
+  m_LocalPosition: {x: -4, y: 8.3, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 62.45, y: 0, z: 0}
 --- !u!1 &1794488019
 GameObject:
   m_ObjectHideFlags: 0
@@ -39934,6 +39997,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1815744983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1815744984}
+  m_Layer: 0
+  m_Name: GameBattleCam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1815744984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815744983}
+  m_LocalRotation: {x: 0.6205005, y: -0, z: -0, w: 0.7842061}
+  m_LocalPosition: {x: -0.11, y: 12.87, z: 1.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 76.705, y: 0, z: 0}
 --- !u!1 &1818721900
 GameObject:
   m_ObjectHideFlags: 0

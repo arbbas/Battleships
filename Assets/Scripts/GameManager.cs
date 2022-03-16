@@ -81,6 +81,16 @@ public class GameManager : MonoBehaviour
     //Camera for the field overview shot during gameplay
     public GameObject battleCamera;
 
+    bool movingCamera;
+
+    public GameObject placingCanvas;
+
+
+
+
+
+
+
     private void Awake()
     {
         instance = this; //responsible for access to the static game manager instance in this script
@@ -246,6 +256,10 @@ public class GameManager : MonoBehaviour
 
                     PlaceManager.instance.SetPlayfield(players[playerTurn].physicalPlayfield);
 
+                    //WE WILL ALSO START THE COROUTINE HERE (IENUMERATOR) SO THAT THE CAMERA MOVES TO THE CORRECT START POSITION
+                    StartCoroutine(CameraMovement(players[playerTurn].camPosition));
+
+
                     gameState = GameStates.IDLE;
                 }
                 break;
@@ -287,6 +301,9 @@ public class GameManager : MonoBehaviour
     public void P1PlaceShips()
     {
         gameState = GameStates.PLAYER1DEPLOY;
+
+        
+
     }
 
     public void P2PlaceShips()
@@ -307,12 +324,13 @@ public class GameManager : MonoBehaviour
             HideAllMyShips();
 
             //switch active player to p2
-
+            SwitchPlayer();
             //move the camera to p2 board
-
+            StartCoroutine(CameraMovement(players[playerTurn].camPosition));
             //activate p2 placing panel
-
+            players[playerTurn].placePanel.SetActive(true);
             //Return
+            return;
         }
 
         if(playerTurn == 1)
@@ -321,15 +339,15 @@ public class GameManager : MonoBehaviour
             HideAllMyShips();
 
             //switch active player to p1
-
+            SwitchPlayer();
             //move the camera to p1 board
-
+            StartCoroutine(CameraMovement(battleCamera));
             //activate p1 SHOOTING panel
-
+            players[playerTurn].shootPanel.SetActive(true);
             //Unhide player 1 ships (maybe)
-
+            UnideAllMyShips();  //?
             //Deactivate placing canvas
-
+            placingCanvas.SetActive(false);
             //Return
         }
     }
@@ -357,5 +375,52 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+    void SwitchPlayer()
+    {
+        playerTurn++;   //INCREMENT ACTIVE PLAYER BY 1
+        playerTurn %= 2;    //THIS RESETS IT TO ZERO WHEN ACTIVE PLAYER IS 2 SO IT DOESN'T INCREMENT FURTHER
+    }
+
+
+    //TIME BASED ACTION FOR THE MOVEMENT OF THE CAMERA AS THE PLAYERS SWITCH
+    //THE IENUMERATOR IS A COROUTINE
+    IEnumerator CameraMovement (GameObject camObj)
+    {
+        if (movingCamera)
+        {
+            yield break;
+        }
+
+        movingCamera = true;
+
+        //CAMERA MOVE TIME
+        float t = 0; //START TIME
+        float duration = 0.5f;  //TIME DURATION OF CAMERA MOVEMENT MADE HERE
+
+        //BELOW WILL DETERMINE THE CAMERA POSITIONING (START)
+        Vector3 startPosition = Camera.main.transform.position;
+        //ROTATION OF THE CAMERA THROUGH USE OF A QUTERNION BELOW(START)
+        Quaternion startRotation = Camera.main.transform.rotation;
+
+        //BELOW WILL DETERMINE THE CAMERA POSITIONING (END)
+        Vector3 endPosition = camObj.transform.position;
+        //ROTATION OF THE CAMERA THROUGH USE OF A QUTERNION BELOW(END)
+        Quaternion endRotation = camObj.transform.rotation;
+
+
+        //ALL OF THE ABOVE INFO NOW GOES INTO A WHILE LOOP SO THAT WE CAN EXCECUTE THE MOVEMENT
+        while(t < duration)
+        {
+            t+=Time.deltaTime;
+            Camera.main.transform.position = Vector3.Lerp(startPosition, endPosition, t / duration);
+            Camera.main.transform.rotation = Quaternion.Lerp(startRotation, endRotation, t / duration);
+                // LERP INTERPOLATES BETWEEN THE 2 VECTOR POINTS WE HAVE ESTABLISHED BETWEEN PLAYER 1 AND 2 AS WELL AS FOR THE ROTATION POINTS
+            yield return null;
+        }
+
+        movingCamera = false;
+    }
+
 }
 
