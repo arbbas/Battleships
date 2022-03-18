@@ -207,6 +207,26 @@ public class PlaceManager : MonoBehaviour
         return true;
     }
 
+    bool CheckForSpaceships(Transform tr)
+    {
+        foreach (Transform child in tr.transform)
+        {
+            GhostActions ghost = child.GetComponent<GhostActions>();
+            if (!ghost.TileHover())
+            {
+                //Tints red
+                //child.GetComponent<MeshRenderer>().material.color = new Color32(255, 0, 0, 125);
+                return false;
+            }
+            // Tints back to white
+            //child.GetComponent<MeshRenderer>().material.color = new Color32(0, 0, 0, 100);
+        }
+        return true;
+    }
+
+
+
+
     // Rotate 90 degrees
     void RotateSpaceship()
     {
@@ -311,5 +331,88 @@ public class PlaceManager : MonoBehaviour
             ship.placedAmount = 0;
         }
         UpdateAmountText();
+
+        //THE FOLLOWING DISABLES THE READY BUTTON UNTIL ALL THE SHIPS ARE PLACED
+        readyButton.interactable = false;
+    }
+
+    public void AutoPlaceShip()
+    {
+        //CLEAR ALL SHIPS FIRST
+        ClearAllShips();
+        //GameManager.instance.DestroyAllShips();
+
+        bool posFound = false;
+
+        //LOOP THROUGH ALL SPACESHIPS FIRST
+        for (int i = 0; i < spaceshipList.Count; i++)
+        {
+            //LOOP THROUGH EVERY SPACESHIP AMOUNT
+            for (int j = 0; j < spaceshipList[i].placedAmount; j++)
+            {
+                if (spaceshipList[i].placedAmount <= 0)
+                {
+                    print("error - there is no or negative ship amount in the placing manager");
+                    return;
+                }
+                posFound = false;
+
+                //WHILE NO POSITION FOUND
+                while (!posFound)
+                {
+                    //STAY HERE UNTIL WE FIND A POSSIBLE POSITION - OR A USEFUL POSITION
+                    currentSpaceship = i;
+                    //PICK A RANDOM START POSITION
+                    int xPos = Random.Range(0, 10);
+                    int zPos = Random.Range(0, 10);     //THESE FIGURES ARE BASED ON THE GRID 
+                    //CREATE A GHOST
+                    GameObject tempGhost = Instantiate(spaceshipList[currentSpaceship].spaceshipGhost);
+                    tempGhost.SetActive(true);
+                    //SET GHOST PLAYFIELD????? - WE PROBABLY WON'T NEED THIS 
+
+                    //SET POSITION OF GHOST SPACESHIPS
+                    tempGhost.transform.position = new Vector3(playfield.transform.position.x + xPos, 0, playfield.transform.position.z + zPos);
+
+                    Vector3[] rot = {Vector3.zero, new Vector3(0, 90, 0), new Vector3(0, 180, 0), new Vector3(0, 270, 0) };
+
+                    //CHECK FOR ALL ROTATIONS
+                    for (int r = 0; r < rot.Length; r++)
+                    {
+                        List<int> indexList = new List<int> { 0, 1, 2, 3 };
+                        int rr = indexList[Random.Range(0, indexList.Count)];
+
+                        tempGhost.transform.rotation = Quaternion.Euler(rot[rr]);
+                        if (CheckForSpaceships(tempGhost.transform))
+                        {
+                            PlaceAutoSpaceShip(tempGhost);
+                            posFound = true;
+                        }
+                        else
+                        {
+                            Destroy(tempGhost);
+                            indexList.Remove(r);
+                        }
+                    }
+                }
+
+            }
+        }
+        readyButton.interactable = true;
+        //CheckForSpaceships();                           //CHECK THIS LINE IS CORRECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //AllSpaceshipsPlaced();
+    }
+
+
+    void PlaceAutoSpaceShip(GameObject temp)
+     {
+    GameObject newSpaceShip = Instantiate(spaceshipList[currentSpaceship].spaceshipPrefab, temp.transform.position, temp.transform.rotation);
+    GameManager.instance.UpdatesGrid(temp.transform, newSpaceShip.GetComponent<CraftBehaviour>(), newSpaceShip);
+    spaceshipList[currentSpaceship].placedAmount++;
+
+    Destroy(temp);
+    UpdateAmountText();
+
+
+        
     }
 }

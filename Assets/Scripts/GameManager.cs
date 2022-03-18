@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
 
             }
         }
+
+        //public List<GameObject> placedShipList = new List<GameObject>();
     }
 
  
@@ -86,9 +88,12 @@ public class GameManager : MonoBehaviour
     public GameObject placingCanvas;
 
 
+    bool isShooting;    //PROTECT COROUTINE
 
-
-
+    //ROCKET
+    public GameObject rocketPrefab;
+    float amplitude = 3f;
+    float cTime;
 
 
     private void Awake()
@@ -345,7 +350,7 @@ public class GameManager : MonoBehaviour
             //activate p1 SHOOTING panel
             players[playerTurn].shootPanel.SetActive(true);
             //Unhide player 1 ships (maybe)
-            UnideAllMyShips();  //?
+            
             //Deactivate placing canvas
             placingCanvas.SetActive(false);
             //Return
@@ -422,5 +427,98 @@ public class GameManager : MonoBehaviour
         movingCamera = false;
     }
 
+
+
+
+
+
+    //-----------BATTLE MODE---------------
+
+    //SHOOT PANEL BUTTONS
+    public void ShotButton()
+    {
+        UnideAllMyShips();
+        players[playerTurn ].shootPanel.SetActive(false);
+        gameState = GameStates.SHOOTING;
+    }
+
+    int Opponent()
+    {
+        int me = playerTurn;
+        me++;
+        me %= 2;
+        int opponent = me;
+        return opponent;
+    }
+
+    public void CheckCoordinate(int x, int z, TileInformation info)
+    {
+        int opponent = Opponent();
+
+        //if the tile is not the opponents tile
+        if (!players[opponent].physicalPlayfield.RequestTile(info))
+        {
+            print("Don't Shoot Yourself!");
+            return;
+        }
+
+        //IF PLAYER HAS SHOT THIS COORDINATE ALREADY?
+        if (players[opponent].hitGrid[x, z] == true)
+        {
+            print("You have shot here already!");
+            return;
+        }
+
+        //CHECK IF THE TILE IS ALREADY OCCUPIED
+        if (players[opponent].grid[x, z].IsBeingOccupied())
+        {
+            //DO DAMAGE TO THE SPACESHIP
+            bool destroyed = players[opponent].grid[x, z].spaceShipType.TakeDamage();
+            if (destroyed)
+            {
+                players[opponent].placedSpaceshipList.Remove(players[opponent].grid[x, z].spaceShipType.gameObject);
+            }
+            //HIGHLIGHT THE TILE IN A DIFFERENT WAY
+            info.HighlightActivate(3, true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+        else
+        {
+            //NOT HIT A SHIP
+            info.HighlightActivate(2, true);
+        }
+        //REVEAL TILE
+        players[opponent].hitGrid[x, z] = true;
+
+        // CHECK IF A PLYER HAS WON
+        if (players[opponent].placedSpaceshipList.Count == 0)
+        {
+            print("You Win!");
+        }
+        //HIDE MY SHIPS
+
+        //SWITCH PLAYERS
+
+        //ACTIVATE THE CORRECT PANELS
+
+        //SWITCH GAMESTATE TO IDLE
+    }
+    
 }
 

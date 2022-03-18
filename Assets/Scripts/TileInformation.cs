@@ -29,9 +29,32 @@ public class TileInformation : MonoBehaviour
 	 * 
 	 * @param index - The assosiated number to highlight icon.
 	 */
-    public void HighlightActivate(int index)
+
+
+
+
+
+    public void HighlightActivate(int index, bool _shot)
     {
         sprite.sprite = tileHighlights[index];
+
+        //COLOUR THE SPRITE
+        if (index == 2)
+        {
+            sprite.color = Color.blue;
+        }
+
+        if (index == 3)
+        {
+            sprite.color = Color.red;
+        }
+
+
+
+        shot = _shot;
+
+
+
     }
 
     /** Sets the X and Z position to be called when generating the playfield
@@ -48,12 +71,23 @@ public class TileInformation : MonoBehaviour
     // Reacts when mouse hovers over tile and calls method to show crosshair
     void OnMouseOver()
     {
-        HighlightActivate(1);
+        if (GameManager.instance.gameState == GameManager.GameStates.SHOOTING)
+        {
+            if (!shot)
+            {
+               HighlightActivate(1, false);
+            }
+            if (Input.GetMouseButton(0))
+            {
+                //  GAME MANAGER CHECK THIS COORDINATE
+                GameManager.instance.CheckCoordinate(xPosition, zPosition, this);
+            }
+        }
     }
 
     // Only show highlight-icon when needed. Resets to frame.
     void OnMouseExit()
     {
-        HighlightActivate(0);
+        HighlightActivate(0, false);
     }
 }
