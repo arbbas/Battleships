@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour
         //Reference for the shooting confirmation panel
         public GameObject shootPanel;
 
+        //Reference for the win panels
+
+        public GameObject WinPanels;
+
 
 
         //Between turn panels to prompt player before grid is updated
@@ -108,6 +112,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         HideAllPanels();
+
+        //RANDOMISE PLAYER HERE
+        players[0].WinPanels.SetActive(false);
+        players[1].WinPanels.SetActive(false);
 
         //first player placing functionality is activated.
         players[playerTurn].placePanel.SetActive(true);
@@ -546,6 +554,7 @@ public class GameManager : MonoBehaviour
         if (players[opponent].placedSpaceshipList.Count == 0)
         {
             print("You Win!");
+            players[playerTurn].WinPanels.SetActive(true);
             yield break;
                 
         }
