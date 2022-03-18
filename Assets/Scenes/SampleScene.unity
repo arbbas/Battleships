@@ -5104,6 +5104,7 @@ MonoBehaviour:
   gameState: 3
   battleCamera: {fileID: 1815744983}
   placingCanvas: {fileID: 826650977}
+  rocketPrefab: {fileID: 8564707931618282268, guid: 274f66ffcf8d64af8ba81dc672cec821, type: 3}
 --- !u!1 &279051680
 GameObject:
   m_ObjectHideFlags: 0
