@@ -80,7 +80,7 @@ public class TileInformation : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 //  GAME MANAGER CHECK THIS COORDINATE
-                GameManager.instance.CheckCoordinate(xPosition, zPosition, this);
+                GameManager.instance.CheckShoot(xPosition, zPosition, this);
             }
         }
     }

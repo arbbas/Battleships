@@ -451,22 +451,40 @@ public class GameManager : MonoBehaviour
         return opponent;
     }
 
-    public void CheckCoordinate(int x, int z, TileInformation info)
+
+
+    public void CheckShoot(int x, int z, TileInformation info)
     {
+        StartCoroutine(CheckCoordinate(x, z, info));
+    }
+
+
+
+    IEnumerator CheckCoordinate(int x, int z, TileInformation info)
+    {
+        if (isShooting)
+        {
+            yield break;
+        }
+        isShooting = true;
+
+
         int opponent = Opponent();
 
         //if the tile is not the opponents tile
         if (!players[opponent].physicalPlayfield.RequestTile(info))
         {
             print("Don't Shoot Yourself!");
-            return;
+            isShooting = false;
+            yield break;
         }
 
         //IF PLAYER HAS SHOT THIS COORDINATE ALREADY?
         if (players[opponent].hitGrid[x, z] == true)
         {
             print("You have shot here already!");
-            return;
+            isShooting = false;
+            yield break;
         }
 
         //CHECK IF THE TILE IS ALREADY OCCUPIED
@@ -518,7 +536,12 @@ public class GameManager : MonoBehaviour
         //ACTIVATE THE CORRECT PANELS
 
         //SWITCH GAMESTATE TO IDLE
+        isShooting = false;
+
+
     }
+
+    
     
 }
 
