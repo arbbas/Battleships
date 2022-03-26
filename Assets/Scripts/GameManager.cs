@@ -84,15 +84,25 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public int remainingShots = 3;
 
-    //Reference for the P1 text object displaying remaining shots
+    //Reference for the text objects displaying remaining shots in game.
     public Text P1shotsText;
-
-    //Reference for the P2 text object displaying remaining shots
     public Text P2shotsText;
 
+    //Reference for the text displaying players shots this turn. Used for the reroll button.
+    public Text P1LoadingShotsText;
+    public Text P2LoadingShotsText;
+    
+    //Reference for the panels containing both players shooting information
     public GameObject P1ShotsPanel;
-
     public GameObject P2ShotsPanel;
+
+    //Boolean value used to track if the players have used their reroll or not
+    bool P1RerollUsed;
+    bool P2RerollUsed;
+
+    // Reference to the reroll buttons - this is used to deactivate them if they have been used already.
+    public GameObject P1RerollButton;
+    public GameObject P2RerollButton;
 
     System.Random ran = new System.Random();
     //--------------------------------------------------------------------------------------------
@@ -152,7 +162,9 @@ public class GameManager : MonoBehaviour
 
         gameState = GameStates.IDLE;
 
-        remainingShots = 3;
+        P1RerollUsed = false;
+        P2RerollUsed = false;
+
 
     }
 
@@ -288,7 +300,7 @@ public class GameManager : MonoBehaviour
         {
             case GameStates.IDLE:
                 {
-                    ShotCountDiceRoll();
+                    
                 }
                 break;
 
@@ -362,7 +374,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Change state to 
+    /// Change state to deployment
     /// </summary>
     public void P2PlaceShips()
     {
@@ -658,9 +670,31 @@ public class GameManager : MonoBehaviour
         SwitchPlayer();
         //ACTIVATE THE CORRECT PANELS
         players[playerTurn].shootPanel.SetActive(true);
+
         //SWITCH GAMESTATE TO IDLE
         gameState = GameStates.IDLE;
         isShooting = false;
+
+
+        //Generate Shot count for next player
+        ShotCountDiceRoll();
+       //Prepare the text for the next players loading screen
+        if(playerTurn == 0)
+        {
+            UpdateShotText(P1LoadingShotsText);
+            if(P1RerollUsed)
+            {
+                P1RerollButton.SetActive(false);
+            }
+        }
+        else
+        {
+            UpdateShotText(P2LoadingShotsText);
+            if (P2RerollUsed)
+            {
+                P2RerollButton.SetActive(false);
+            }
+        }
     }
 
     bool MovesInArcToTile(Vector3 startPosition, Vector3 endPosition, float speed, GameObject rocket)
@@ -687,11 +721,31 @@ public class GameManager : MonoBehaviour
     /// Use the c# Random to generate a number of shots between an upper and lower bound.
     /// </summary>
     /// <returns></returns>
-    void ShotCountDiceRoll()
+    public void ShotCountDiceRoll()
     {
         remainingShots = ran.Next(1, 6);
     }
 
 
+    /// <summary>
+    /// Method called when the reroll button is pressed.
+    /// </summary>
+    public void rerollButton()
+    {
+        ShotCountDiceRoll();
+
+        if(playerTurn == 0)
+        {
+            UpdateShotText(P1LoadingShotsText);
+            P1RerollUsed = true;
+            P1RerollButton.SetActive(false);
+        }
+        else
+        {
+            UpdateShotText(P2LoadingShotsText);
+            P2RerollUsed = true;
+            P2RerollButton.SetActive(false);
+        }
+    }
 }
 
