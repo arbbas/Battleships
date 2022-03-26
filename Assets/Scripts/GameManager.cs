@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 /**
  * @reference - basic game code is adapted from Udemy tutorial 'Battleships 3D', available at: https://www.udemy.com/course/unity-game-tutorial-battleships-3d/ 
@@ -46,6 +48,9 @@ public class GameManager : MonoBehaviour
         public GameObject WinPanels;
 
 
+ 
+
+
 
         //Between turn panels to prompt player before grid is updated
         //Constructor that runs whenever we make a new player
@@ -73,6 +78,25 @@ public class GameManager : MonoBehaviour
     //creates two players immediately when game spins up
     public Player[] players = new Player[2];
 
+    //-----Tools for Fin's shot generator mechanism-----------------------------------------------
+
+    // Reference for the remaining shots of the players turn
+    [SerializeField]
+    public int remainingShots = 3;
+
+    //Reference for the P1 text object displaying remaining shots
+    public Text P1shotsText;
+
+    //Reference for the P2 text object displaying remaining shots
+    public Text P2shotsText;
+
+    public GameObject P1ShotsPanel;
+
+    public GameObject P2ShotsPanel;
+
+    System.Random ran = new System.Random();
+    //--------------------------------------------------------------------------------------------
+
     public enum GameStates
     {
         PLAYER1DEPLOY,
@@ -93,6 +117,8 @@ public class GameManager : MonoBehaviour
 
 
     bool isShooting;    //PROTECT COROUTINE
+
+
 
     //ROCKET
     public GameObject rocketPrefab;
@@ -120,8 +146,13 @@ public class GameManager : MonoBehaviour
         //first player placing functionality is activated.
         players[playerTurn].placePanel.SetActive(true);
 
+        //Deactivate RemainingShots panels
+        P1ShotsPanel.SetActive(false);
+        P2ShotsPanel.SetActive(false);
+
         gameState = GameStates.IDLE;
 
+        remainingShots = 3;
 
     }
 
@@ -257,7 +288,7 @@ public class GameManager : MonoBehaviour
         {
             case GameStates.IDLE:
                 {
-
+                    ShotCountDiceRoll();
                 }
                 break;
 
@@ -293,9 +324,22 @@ public class GameManager : MonoBehaviour
             case GameStates.SHOOTING:
                 {
 
+
+                    if(playerTurn == 0)
+                    {
+                        P1ShotsPanel.SetActive(true);
+                    }
+                    else
+                    {
+                        P2ShotsPanel.SetActive(true);
+                    }
+
+
                 }
                 break;
         }
+        UpdateShotText(P1shotsText);
+        UpdateShotText(P2shotsText);
     }
 
     /// <summary>
@@ -315,13 +359,15 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameStates.PLAYER1DEPLOY;
 
-
-
     }
 
+    /// <summary>
+    /// Change state to 
+    /// </summary>
     public void P2PlaceShips()
     {
         gameState = GameStates.PLAYER2DEPLOY;
+
     }
 
     /// <summary>
@@ -362,6 +408,8 @@ public class GameManager : MonoBehaviour
             //Deactivate placing canvas
             placingCanvas.SetActive(false);
             //Return
+            //Call method to generate first set of shot numbers
+            ShotCountDiceRoll();
         }
     }
 
@@ -380,7 +428,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Method for activating the mesh renderer, so player can see their own pieces
     /// </summary>
-    void UnideAllMyShips()
+    void UnhideAllMyShips()
     {
         foreach (var ship in players[playerTurn].placedSpaceshipList)
         {
@@ -442,14 +490,22 @@ public class GameManager : MonoBehaviour
 
     //-----------BATTLE MODE---------------
 
-    //SHOOT PANEL BUTTONS
+    /// <summary>
+    /// Player presses the shoot panel button. 
+    /// Their ships become visible, the panel becomes hidden and the game state changes to SHOOTING
+    /// </summary>
     public void ShotButton()
     {
-        UnideAllMyShips();
+        UnhideAllMyShips();
         players[playerTurn].shootPanel.SetActive(false);
         gameState = GameStates.SHOOTING;
     }
 
+    /// <summary>
+    /// Method for returning the number representing the opponent. 
+    /// Used for determining legal gameboard is being shot at.
+    /// </summary>
+    /// <returns></returns>
     int Opponent()
     {
         int me = playerTurn;
@@ -460,106 +516,142 @@ public class GameManager : MonoBehaviour
     }
 
 
-
     public void CheckShoot(int x, int z, TileInformation info)
     {
         StartCoroutine(CheckCoordinate(x, z, info));
     }
 
 
-
     IEnumerator CheckCoordinate(int x, int z, TileInformation info)
     {
-        if (isShooting)
-        {
-            yield break;
-        }
-        isShooting = true;
 
 
-        int opponent = Opponent();
-
-        //if the tile is not the opponents tile
-        if (!players[opponent].physicalPlayfield.RequestTile(info))
-        {
-            print("Don't Shoot Yourself!");
-            isShooting = false;
-            yield break;
-        }
-
-        //IF PLAYER HAS SHOT THIS COORDINATE ALREADY?
-        if (players[opponent].hitGrid[x, z] == true)
-        {
-            print("You have shot here already!");
-            isShooting = false;
-            yield break;
-        }
-
-        //SHOOTING A ROCKET
-        //the below is the start position of where the rocket will be shot from
-        Vector3 startPosition = Vector3.zero;
-        //the below is where the rocket reaches
-        Vector3 endPosition = info.gameObject.transform.position;
-        //INSTANTIATE A ROCKET
-        GameObject rocket = Instantiate(rocketPrefab, startPosition, Quaternion.identity);
-
-        //MOVE THE ROCKET INSIDE AN ARC 
-        while(MovesInArcToTile(startPosition, endPosition, 0.5f, rocket))
-        {
-            yield return null;
-        }
-        Destroy(rocket);
-        cTime = 0;
-
-
-
-        //CHECK IF THE TILE IS ALREADY OCCUPIED
-        if (players[opponent].grid[x, z].IsBeingOccupied())
-        {
-            //DO DAMAGE TO THE SPACESHIP
-            bool destroyed = players[opponent].grid[x, z].spaceShipType.TakeDamage();
-            if (destroyed)
+            if (isShooting)
             {
-                players[opponent].placedSpaceshipList.Remove(players[opponent].grid[x, z].spaceShipType.gameObject);
+                yield break;
             }
-            //HIGHLIGHT THE TILE IN A DIFFERENT WAY
-            info.HighlightActivate(3, true);
+            isShooting = true;
+
+
+            int opponent = Opponent();
+
+            //if the tile is not the opponents tile
+            if (!players[opponent].physicalPlayfield.RequestTile(info))
+            {
+                print("Don't Shoot Yourself!");
+                isShooting = false;
+                yield break;
+            }
+
+            //IF PLAYER HAS SHOT THIS COORDINATE ALREADY?
+            if (players[opponent].hitGrid[x, z] == true)
+            {
+                print("You have shot here already!");
+                isShooting = false;
+                yield break;
+            }
+
+            //SHOOTING A ROCKET
+            //the below is the start position of where the rocket will be shot from
+            Vector3 startPosition = Vector3.zero;
+            //the below is where the rocket reaches
+            Vector3 endPosition = info.gameObject.transform.position;
+            //INSTANTIATE A ROCKET
+            GameObject rocket = Instantiate(rocketPrefab, startPosition, Quaternion.identity);
+
+            //MOVE THE ROCKET INSIDE AN ARC 
+            while (MovesInArcToTile(startPosition, endPosition, 0.5f, rocket))
+            {
+                yield return null;
+            }
+            Destroy(rocket);
+            cTime = 0;
 
 
 
+            //CHECK IF THE TILE IS ALREADY OCCUPIED
+            if (players[opponent].grid[x, z].IsBeingOccupied())
+            {
+                //DO DAMAGE TO THE SPACESHIP
+                bool destroyed = players[opponent].grid[x, z].spaceShipType.TakeDamage();
+                if (destroyed)
+                {
+                    players[opponent].placedSpaceshipList.Remove(players[opponent].grid[x, z].spaceShipType.gameObject);
+                }
+                //HIGHLIGHT THE TILE IN A DIFFERENT WAY
+                info.HighlightActivate(3, true);
+
+                //Reduce shot count by 1
+                remainingShots -= 1;
+                Debug.Log("Reduced shot count by 1 - Hit");
+
+            }
+            else
+            {
+                //NOT HIT A SHIP
+                info.HighlightActivate(2, true);
+                //Reduce shot count by 1
+                remainingShots -= 1;
+                Debug.Log("Reduced shot count by 1 - Miss");
+            }
+            //REVEAL TILE
+            players[opponent].hitGrid[x, z] = true;
+
+            // CHECK IF A PLAYER HAS WON
+            if (players[opponent].placedSpaceshipList.Count == 0)
+            {
+                print("You Win!");
+                players[playerTurn].WinPanels.SetActive(true);
+                yield break;
+                Debug.Log("Check if game won");
+            }
+            yield return new WaitForSeconds(2f);
 
 
+            
+            //Update the remaining shots of the player in question
+            if(playerTurn == 0)
+            {             
+                UpdateShotText(P1shotsText);
+                Debug.Log("Update P1 text");
+            }
+            else
+            {
+                UpdateShotText(P2shotsText);
+                Debug.Log("Update P2 text");
 
+            }
 
+        //If the player has no more shots, end the turn
+        if (remainingShots == 0)
+            {
+                //Deactivate the shots panel for the player
+                if (playerTurn == 0)
+                {
+                    P1ShotsPanel.SetActive(false);
+                    Debug.Log("Deactivated P1 Panel");
 
-
-
-
-
-
-
-
-
-
-        }
+                }
+            else
+                {
+                    P2ShotsPanel.SetActive(false);
+                    Debug.Log("Deactivated P2 Panel");
+                }
+                //End the players turn
+                EndPlayerTurn();
+            }
         else
         {
-            //NOT HIT A SHIP
-            info.HighlightActivate(2, true);
+            isShooting = false;
         }
-        //REVEAL TILE
-        players[opponent].hitGrid[x, z] = true;
 
-        // CHECK IF A PLYER HAS WON
-        if (players[opponent].placedSpaceshipList.Count == 0)
-        {
-            print("You Win!");
-            players[playerTurn].WinPanels.SetActive(true);
-            yield break;
-                
-        }
-        yield return new WaitForSeconds(2f);
+    }
 
+    /// <summary>
+    /// Method used to handle end of one players shooting turn and prepare for player 2.
+    /// </summary>
+    void EndPlayerTurn()
+    {
         //HIDE MY SHIPS
         HideAllMyShips();
         //SWITCH PLAYERS
@@ -569,8 +661,6 @@ public class GameManager : MonoBehaviour
         //SWITCH GAMESTATE TO IDLE
         gameState = GameStates.IDLE;
         isShooting = false;
-
-
     }
 
     bool MovesInArcToTile(Vector3 startPosition, Vector3 endPosition, float speed, GameObject rocket)
@@ -582,5 +672,26 @@ public class GameManager : MonoBehaviour
         return endPosition != (rocket.transform.position = Vector3.Lerp(rocket.transform.position, nextPos, cTime));
 
     }
+
+    //---------------------------------------Fin's Multi-Shot Mechanic-----------------------------------------------------------------------------------
+
+    /// <summary>
+    /// Method used to update the amount of shots displayed in the text field.
+    /// </summary>
+    void UpdateShotText(Text remainingShotsText)
+    {
+        remainingShotsText.text = remainingShots.ToString();
+    }
+
+    /// <summary>
+    /// Use the c# Random to generate a number of shots between an upper and lower bound.
+    /// </summary>
+    /// <returns></returns>
+    void ShotCountDiceRoll()
+    {
+        remainingShots = ran.Next(1, 6);
+    }
+
+
 }
 

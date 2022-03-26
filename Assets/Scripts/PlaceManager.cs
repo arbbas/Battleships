@@ -309,7 +309,7 @@ public class PlaceManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Method for updating the UI display of the amount of ships to lace. 
+    /// Method for updating the UI display of the amount of ships to place. 
     /// </summary>
     void UpdateAmountText()
     {
