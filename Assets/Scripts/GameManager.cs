@@ -78,11 +78,11 @@ public class GameManager : MonoBehaviour
     //creates two players immediately when game spins up
     public Player[] players = new Player[2];
 
-    //-----Tools for Fin's shot generator mechanism-----------------------------------------------
+    //-----Attributes for Fin's shot generator mechanism-----------------------------------------------
 
     // Reference for the remaining shots of the players turn
     [SerializeField]
-    public int remainingShots = 3;
+    public int remainingShots;
 
     //Reference for the text objects displaying remaining shots in game.
     public Text P1shotsText;
@@ -104,7 +104,20 @@ public class GameManager : MonoBehaviour
     public GameObject P1RerollButton;
     public GameObject P2RerollButton;
 
+    //Random number generator - needed for the 'dice roll' for the shots.
     System.Random ran = new System.Random();
+
+    //Attributes for the Power-Up feature
+
+    //References for the power up buttons each player can use.
+    public GameObject P1PowerUpButton;
+    public GameObject P2PowerUpButton;
+
+    //Bools to track if the players have used their power up or not
+    bool P1PowerUpUsed;
+    bool P2PowerUpUsed;
+
+
     //--------------------------------------------------------------------------------------------
 
     public enum GameStates
@@ -422,6 +435,8 @@ public class GameManager : MonoBehaviour
             //Return
             //Call method to generate first set of shot numbers
             ShotCountDiceRoll();
+            UpdateShotText(P1LoadingShotsText);
+            UpdateShotText(P2LoadingShotsText);
         }
     }
 
@@ -504,13 +519,30 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Player presses the shoot panel button. 
-    /// Their ships become visible, the panel becomes hidden and the game state changes to SHOOTING
+    /// Their ships become visible, the panel becomes hidden and the game state changes to SHOOTING.
+    /// Fin note 30/03/22 - added functionality to hide the power up button if the power up has already been used.
     /// </summary>
     public void ShotButton()
     {
         UnhideAllMyShips();
         players[playerTurn].shootPanel.SetActive(false);
         gameState = GameStates.SHOOTING;
+
+        if (playerTurn == 0)
+        {
+            if (P1PowerUpUsed)
+            {
+                P1PowerUpButton.SetActive(false);
+            }
+        }
+        else
+        {
+            if (P2PowerUpUsed)
+            {
+                P2PowerUpButton.SetActive(false);
+            }
+        }
+
     }
 
     /// <summary>
@@ -747,5 +779,32 @@ public class GameManager : MonoBehaviour
             P2RerollButton.SetActive(false);
         }
     }
+
+    /// <summary>
+    /// Method called when the power-up button is clicked.
+    /// Adds one more shot for the player.
+    /// Changes boolean tracking use of power-up to true.
+    /// Disables the power-up button.
+    /// </summary>
+    public void usePowerUpButton()
+    {
+        remainingShots += 1;
+
+        if (playerTurn == 0)
+        {
+            UpdateShotText(P1shotsText);
+            P1PowerUpUsed = true;
+            P1PowerUpButton.SetActive(false);
+
+        }
+        else
+        {
+            UpdateShotText(P2shotsText);
+            P2PowerUpUsed = true;
+            P2PowerUpButton.SetActive(false);
+        }
+    }
+
+
 }
 
