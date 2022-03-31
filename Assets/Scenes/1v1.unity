@@ -5458,6 +5458,7 @@ MonoBehaviour:
   gameState: 3
   battleCamera: {fileID: 1815744983}
   placingCanvas: {fileID: 826650977}
+  laserPrefab: {fileID: 1945849832085100991, guid: 6d0128346bd40b44d9ad2891c650cfd2, type: 3}
   rocketPrefab: {fileID: 8564707931618282268, guid: 274f66ffcf8d64af8ba81dc672cec821, type: 3}
 --- !u!114 &276256566
 MonoBehaviour:
@@ -11944,7 +11945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &514654091
 RectTransform:
   m_ObjectHideFlags: 0
