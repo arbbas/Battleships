@@ -169,6 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
+
   controlID: 120
 --- !u!114 &8
 MonoBehaviour:

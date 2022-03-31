@@ -7,7 +7,7 @@ using System;
 /**
  * @reference - basic game code is adapted from Udemy tutorial 'Battleships 3D', available at: https://www.udemy.com/course/unity-game-tutorial-battleships-3d/ 
 
- * @version 30-03-2020
+ * @version 31-03-2020
  * @author Enigma Studios
  * 
  */
@@ -116,6 +116,12 @@ public class GameManager : MonoBehaviour
     //Bools to track if the players have used their power up or not
     bool P1PowerUpUsed;
     bool P2PowerUpUsed;
+
+    //References for the 4 banners that display what turn it currently is
+    public GameObject P1DeploymentUI;
+    public GameObject P2DeploymentUI;
+    public GameObject P1FirePhaseUI;
+    public GameObject P2FirePhaseUI;
 
 
     //--------------------------------------------------------------------------------------------
@@ -324,11 +330,14 @@ public class GameManager : MonoBehaviour
                 {
                     players[playerTurn].placePanel.SetActive(false);
 
+                    //Set the banner that says what turn it is on.
+
+                    P1DeploymentUI.SetActive(true);
+
                     PlaceManager.instance.SetPlayfield(players[playerTurn].physicalPlayfield);
 
                     //WE WILL ALSO START THE COROUTINE HERE (IENUMERATOR) SO THAT THE CAMERA MOVES TO THE CORRECT START POSITION
                     StartCoroutine(CameraMovement(players[playerTurn].camPosition));
-
 
                     gameState = GameStates.IDLE;
                 }
@@ -340,6 +349,8 @@ public class GameManager : MonoBehaviour
                 {
                     players[playerTurn].placePanel.SetActive(false);
 
+                    //Set the banner that says what turn it is on.
+                    P2DeploymentUI.SetActive(true);
 
                     PlaceManager.instance.SetPlayfield(players[playerTurn].physicalPlayfield);
 
@@ -369,7 +380,8 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Deactivates all the panels in the game UI
+    /// Deactivates all the panels in the game UI.
+    /// Added in the 4 UI that 
     /// </summary>
     void HideAllPanels()
     {
@@ -379,6 +391,10 @@ public class GameManager : MonoBehaviour
         players[1].placePanel.SetActive(false);
         players[1].shootPanel.SetActive(false);
 
+        P1DeploymentUI.SetActive(false);
+        P2DeploymentUI.SetActive(false);
+        P1FirePhaseUI.SetActive(false);
+        P2FirePhaseUI.SetActive(false);
     }
 
     public void P1PlaceShips()
@@ -408,6 +424,9 @@ public class GameManager : MonoBehaviour
             //hide ships
             HideAllMyShips();
 
+            //Disable the turn banner
+            P1DeploymentUI.SetActive(false);
+
             //switch active player to p2
             SwitchPlayer();
             //move the camera to p2 board
@@ -422,6 +441,9 @@ public class GameManager : MonoBehaviour
         {
             //hide ships
             HideAllMyShips();
+
+            //Disable the turn banner
+            P2DeploymentUI.SetActive(false);
 
             //switch active player to p1
             SwitchPlayer();
@@ -522,6 +544,7 @@ public class GameManager : MonoBehaviour
     /// Player presses the shoot panel button. 
     /// Their ships become visible, the panel becomes hidden and the game state changes to SHOOTING.
     /// Fin note 30/03/22 - added functionality to hide the power up button if the power up has already been used.
+    /// 31/03/22 - added functionality to enable the UI to say what turn it is.
     /// </summary>
     public void ShotButton()
     {
@@ -535,6 +558,7 @@ public class GameManager : MonoBehaviour
             {
                 P1PowerUpButton.SetActive(false);
             }
+            P1FirePhaseUI.SetActive(true);
         }
         else
         {
@@ -542,6 +566,7 @@ public class GameManager : MonoBehaviour
             {
                 P2PowerUpButton.SetActive(false);
             }
+            P2FirePhaseUI.SetActive(true);
         }
 
     }
@@ -653,6 +678,7 @@ public class GameManager : MonoBehaviour
             // CHECK IF A PLAYER HAS WON
             if (players[opponent].placedSpaceshipList.Count == 0)
             {
+                HideAllPanels();
                 print("You Win!");
                 players[playerTurn].WinPanels.SetActive(true);
                 yield break;
@@ -664,7 +690,7 @@ public class GameManager : MonoBehaviour
             
             //Update the remaining shots of the player in question
             if(playerTurn == 0)
-            {             
+            {                         
                 UpdateShotText(P1shotsText);
                 Debug.Log("Update P1 text");
             }
@@ -685,12 +711,14 @@ public class GameManager : MonoBehaviour
                 if (playerTurn == 0)
                 {
                     P1ShotsPanel.SetActive(false);
+                    P1FirePhaseUI.SetActive(false);
                     Debug.Log("Deactivated P1 Panel");
 
                 }
             else
                 {
                     P2ShotsPanel.SetActive(false);
+                    P2FirePhaseUI.SetActive(false);
                     Debug.Log("Deactivated P2 Panel");
                 }
                 //End the players turn
