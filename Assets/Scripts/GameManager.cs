@@ -147,7 +147,8 @@ public class GameManager : MonoBehaviour
 
     bool isShooting;    //PROTECT COROUTINE
 
-
+    //-----------Fin's-Laser-Feature-----------------------------------------------------------------------------------------------
+    public GameObject laserPrefab;
 
     //ROCKET
     public GameObject rocketPrefab;
@@ -620,6 +621,14 @@ public class GameManager : MonoBehaviour
                 yield break;
             }
 
+            //-----------------------Fin-Laser-----------------------------------------------------------
+
+            //Generating the laser shot
+            Vector3 targetPosition = info.gameObject.transform.position;
+            Vector3 laserStartPosition = new Vector3(targetPosition.x, (targetPosition.y + 5), targetPosition.z);
+            GameObject laser = Instantiate(laserPrefab, laserStartPosition, new Quaternion(0f, 0f, 0f, 0f));
+
+        /*
             //SHOOTING A ROCKET
             //the below is the start position of where the rocket will be shot from
             Vector3 startPosition = Vector3.zero;
@@ -635,7 +644,7 @@ public class GameManager : MonoBehaviour
             }
             Destroy(rocket);
             cTime = 0;
-
+        */
 
 
             //CHECK IF THE TILE IS ALREADY OCCUPIED
@@ -695,6 +704,9 @@ public class GameManager : MonoBehaviour
         //If the player has no more shots, end the turn
         if (remainingShots == 0)
             {
+
+                yield return new WaitForSeconds(2f);
+
                 //Deactivate the shots panel for the player
                 if (playerTurn == 0)
                 {
@@ -816,6 +828,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void usePowerUpButton()
     {
+        if (remainingShots == 0)
+        {
+            return;
+        }
+
         remainingShots += 1;
 
         if (playerTurn == 0)
