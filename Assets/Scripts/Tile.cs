@@ -24,6 +24,7 @@ public class Tile
 {
     public OccupationType type; //needs to be stored so that we can read it
     public CraftBehaviour spaceShipType;
+    public CraftBehaviour placedship;
     // Constructor
     public Tile(OccupationType _occupationType, CraftBehaviour _spaceShipType)
     {

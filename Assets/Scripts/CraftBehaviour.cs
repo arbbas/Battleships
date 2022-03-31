@@ -38,7 +38,7 @@ public class CraftBehaviour : MonoBehaviour
     }
 
     // Method to damage spaceship
-    public void TakeDamage()
+    public bool TakeDamage()
     {
         hitCount--;
         if (isDestroyed())
@@ -46,6 +46,9 @@ public class CraftBehaviour : MonoBehaviour
             // Keeps log of spaceship status to game manager
 
             // meshrenderer - unhides ship
+            GetComponent<MeshRenderer>().enabled = true;
+            return true;
         }
+        return false;
     }
 }
