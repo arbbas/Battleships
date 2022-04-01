@@ -120,8 +120,11 @@ public class GameManager : MonoBehaviour
     public GameObject P1FirePhaseUI;
     public GameObject P2FirePhaseUI;
 
+    public GameObject P1ShotCountUI;
+    public GameObject P2ShotCountUI;
 
     //--------------------------------------------------------------------------------------------
+
 
     public enum GameStates
     {
@@ -686,6 +689,9 @@ public class GameManager : MonoBehaviour
             {
                 HideAllPanels();
                 print("You Win!");
+                P1ShotCountUI.SetActive(false);
+                P2ShotCountUI.SetActive(false);
+
                 players[playerTurn].WinPanels.SetActive(true);
                 yield break;
                 Debug.Log("Check if game won");
