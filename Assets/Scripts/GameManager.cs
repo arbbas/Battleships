@@ -48,9 +48,6 @@ public class GameManager : MonoBehaviour
         public GameObject WinPanels;
 
 
- 
-
-
 
         //Between turn panels to prompt player before grid is updated
         //Constructor that runs whenever we make a new player
@@ -154,6 +151,10 @@ public class GameManager : MonoBehaviour
     public GameObject rocketPrefab;
     float amplitude = 3f;                   //THIS IS HOW HIGH THE ROCKET FLIES BEFORE SHOOTING - 3F MEANS IT WILL HAVE A HEIGHT OF 3M OVER THE PLAYFIELD
     float cTime;                            //THIS IS THE TIME BNETWEEN THE START AND END POINT OF THE ROCKET - THIS WILL MAKE USE OF THE LERP FUNCTIONALITY 
+
+    // Fire FX objects
+    public GameObject firePrefab;
+    private List<GameObject> playerFires;
 
 
     private void Awake()
@@ -647,6 +648,13 @@ public class GameManager : MonoBehaviour
         */
 
 
+            // FIRE FX
+            // Vector3 firePosition = info.gameObject.transform.position;
+            // GameObject blast = Instantiate(firePrefab, firePosition, Quaternion.identity);
+            //GameObject blast = Instantiate(firePrefab, firePosition, new Quaternion(0f, 0f, 0f, 0f));
+
+
+
             //CHECK IF THE TILE IS ALREADY OCCUPIED
             if (players[opponent].grid[x, z].IsBeingOccupied())
             {
@@ -663,6 +671,13 @@ public class GameManager : MonoBehaviour
                 remainingShots -= 1;
                 Debug.Log("Reduced shot count by 1 - Hit");
 
+                // hit FX
+                //blast.transform.position = firePosition; 
+                Vector3 firePosition = info.gameObject.transform.position;
+                // GameObject blast = Instantiate(firePrefab, firePosition, Quaternion.identity);
+                GameObject blast = Instantiate(firePrefab, firePosition, new Quaternion(0f, 0f, 0f, 0f));
+                // blast.transform.LookAt(firePosition);
+
             }
             else
             {
@@ -674,6 +689,8 @@ public class GameManager : MonoBehaviour
             }
             //REVEAL TILE
             players[opponent].hitGrid[x, z] = true;
+            // Fire FX
+            
 
             // CHECK IF A PLAYER HAS WON
             if (players[opponent].placedSpaceshipList.Count == 0)
@@ -778,6 +795,8 @@ public class GameManager : MonoBehaviour
         return endPosition != (rocket.transform.position = Vector3.Lerp(rocket.transform.position, nextPos, cTime));
 
     }
+
+
 
     //---------------------------------------Fin's Multi-Shot Mechanic-----------------------------------------------------------------------------------
 

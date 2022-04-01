@@ -5468,6 +5468,7 @@ MonoBehaviour:
   placingCanvas: {fileID: 826650977}
   laserPrefab: {fileID: 1945849832085100991, guid: 6d0128346bd40b44d9ad2891c650cfd2, type: 3}
   rocketPrefab: {fileID: 8564707931618282268, guid: 274f66ffcf8d64af8ba81dc672cec821, type: 3}
+  firePrefab: {fileID: 7667691086527137247, guid: a94f121fbd80a784c83e362ae70515ad, type: 3}
 --- !u!114 &276256566
 MonoBehaviour:
   m_ObjectHideFlags: 0
