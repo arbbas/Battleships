@@ -7,8 +7,8 @@ public class Menu : MonoBehaviour
 {
     public GameObject optionsScreen;
     public GameObject Battleshipmainmenu;
-
-  public void RestartGame()
+   
+    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -21,6 +21,8 @@ public class Menu : MonoBehaviour
     public void LoadGame(string sceneLoad)
     {
         SceneManager.LoadScene(sceneLoad);
+        Battleshipmainmenu.SetActive(false);
+
     }
 
     public void OpenOptions()
@@ -49,3 +51,4 @@ public class Menu : MonoBehaviour
 
     }
 }
+

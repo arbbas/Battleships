@@ -729,8 +729,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 0.1764706}
     m_HighlightedColor: {r: 0, g: 0.9098039, b: 1, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 0.1764706}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.1764706}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -883,7 +883,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 612511697}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1581062746}
+        m_TargetAssemblyTypeName: OptionsScreen, Assembly-CSharp
+        m_MethodName: ResRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &612511697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1890,8 +1902,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 291, y: 196.88}
-  m_SizeDelta: {x: 205.245, y: 49.449}
+  m_AnchoredPosition: {x: 285.38983, y: 196.88}
+  m_SizeDelta: {x: 218.632, y: 49.449}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1270248900
 MonoBehaviour:
@@ -2455,6 +2467,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullscreenToggle: {fileID: 970169060}
   vsyncToggle: {fileID: 699301315}
+  resolutions:
+  - horizontal: 1920
+    vertical: 1080
+  - horizontal: 1260
+    vertical: 720
+  - horizontal: 854
+    vertical: 480
+  resolutionLabel: {fileID: 1883099313}
 --- !u!1 &1682368873
 GameObject:
   m_ObjectHideFlags: 0
@@ -2750,10 +2770,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0.1764706}
-    m_HighlightedColor: {r: 0, g: 0.90896845, b: 1, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.9098039, b: 1, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.1764706}
     m_ColorMultiplier: 3.78
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2905,7 +2925,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1757722397}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1581062746}
+        m_TargetAssemblyTypeName: OptionsScreen, Assembly-CSharp
+        m_MethodName: ResLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1757722397
 MonoBehaviour:
   m_ObjectHideFlags: 0
