@@ -648,13 +648,6 @@ public class GameManager : MonoBehaviour
         */
 
 
-            // FIRE FX
-            // Vector3 firePosition = info.gameObject.transform.position;
-            // GameObject blast = Instantiate(firePrefab, firePosition, Quaternion.identity);
-            //GameObject blast = Instantiate(firePrefab, firePosition, new Quaternion(0f, 0f, 0f, 0f));
-
-
-
             //CHECK IF THE TILE IS ALREADY OCCUPIED
             if (players[opponent].grid[x, z].IsBeingOccupied())
             {
@@ -672,11 +665,8 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Reduced shot count by 1 - Hit");
 
                 // hit FX
-                //blast.transform.position = firePosition; 
                 Vector3 firePosition = info.gameObject.transform.position;
-                // GameObject blast = Instantiate(firePrefab, firePosition, Quaternion.identity);
                 GameObject blast = Instantiate(firePrefab, firePosition, new Quaternion(0f, 0f, 0f, 0f));
-                // blast.transform.LookAt(firePosition);
 
             }
             else
@@ -689,7 +679,6 @@ public class GameManager : MonoBehaviour
             }
             //REVEAL TILE
             players[opponent].hitGrid[x, z] = true;
-            // Fire FX
             
 
             // CHECK IF A PLAYER HAS WON

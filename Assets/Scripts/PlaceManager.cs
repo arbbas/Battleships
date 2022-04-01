@@ -207,7 +207,7 @@ public class PlaceManager : MonoBehaviour
         return true;
     }
 
-    bool CheckForSpaceships(Transform tr)
+    bool CheckForSpaceshipsAuto(Transform tr)
     {
         foreach (Transform child in tr.transform)
         {
@@ -347,20 +347,22 @@ public class PlaceManager : MonoBehaviour
         //LOOP THROUGH ALL SPACESHIPS FIRST
         for (int i = 0; i < spaceshipList.Count; i++)
         {
+            //Debug.Log("Locate where script breaks");
             //LOOP THROUGH EVERY SPACESHIP AMOUNT
             for (int j = 0; j < spaceshipList[i].placedAmount; j++)
             {
+                Debug.Log("Locate where script breaks 1");
                 if (spaceshipList[i].placedAmount <= 0)
                 {
-                    print("error - there is no or negative ship amount in the placing manager");
+                    print("error - negative ship amount in the place manager");
                     return;
                 }
                 posFound = false;
 
                 //WHILE NO POSITION FOUND
-                while (!posFound)
+                while(!posFound)
                 {
-                    //STAY HERE UNTIL WE FIND A POSSIBLE POSITION - OR A USEFUL POSITION
+                    //STAY HERE UNTIL FINDS A POSSIBLE POSITION - OR A USEFUL POSITION
                     currentSpaceship = i;
                     //PICK A RANDOM START POSITION
                     int xPos = Random.Range(0, 10);
@@ -382,7 +384,7 @@ public class PlaceManager : MonoBehaviour
                         int rr = indexList[Random.Range(0, indexList.Count)];
 
                         tempGhost.transform.rotation = Quaternion.Euler(rot[rr]);
-                        if (CheckForSpaceships(tempGhost.transform))
+                        if (CheckForSpaceshipsAuto(tempGhost.transform))
                         {
                             PlaceAutoSpaceShip(tempGhost);
                             posFound = true;
@@ -397,14 +399,14 @@ public class PlaceManager : MonoBehaviour
 
             }
         }
-        readyButton.interactable = true;
-        //CheckForSpaceships();                           //CHECK THIS LINE IS CORRECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //readyButton.interactable = true;
+        CheckForSpaceships();                           //CHECK THIS LINE IS CORRECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //AllSpaceshipsPlaced();
     }
 
 
-    void PlaceAutoSpaceShip(GameObject temp)
-     {
+    public void PlaceAutoSpaceShip(GameObject temp)
+    {
     GameObject newSpaceShip = Instantiate(spaceshipList[currentSpaceship].spaceshipPrefab, temp.transform.position, temp.transform.rotation);
     GameManager.instance.UpdatesGrid(temp.transform, newSpaceShip.GetComponent<CraftBehaviour>(), newSpaceShip);
     spaceshipList[currentSpaceship].placedAmount++;
