@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13966, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: CreditsScene
+  m_EditorClassIdentifier: 
+  templateScene: {fileID: 102900000, guid: c5ec8e6ffe7774a41b160b824a98f6fb, type: 3}
+  templateName: 
+  description: 
+  preview: {fileID: 0}
+  dependencies:
+  - dependency: {fileID: 2800000, guid: d9e2b83e9ce5945dfbfa61c47f71b451, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 12800000, guid: e7492a6c8f128c3419112ae5326fa9df, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 7400000, guid: 5c0e6567c6a7149c087f3920ebb149c0, type: 2}
+    instantiationMode: 0
+  - dependency: {fileID: 9100000, guid: 2306fb22c759a4c20bf5c84c3c24d8bd, type: 2}
+    instantiationMode: 0
+  templatePipeline: {fileID: 0}
+  addToDefaults: 0
