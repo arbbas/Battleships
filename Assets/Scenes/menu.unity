@@ -238,8 +238,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128, y: 98}
-  m_SizeDelta: {x: 222.226, y: 24.829}
+  m_AnchoredPosition: {x: -116.592926, y: 98}
+  m_SizeDelta: {x: 245.04, y: 24.829}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &114867664
 MonoBehaviour:
@@ -272,7 +272,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'Music Volume:
 
@@ -3603,8 +3603,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -114, y: 98}
-  m_SizeDelta: {x: 189.709, y: 24.829}
+  m_AnchoredPosition: {x: -104.43, y: 98}
+  m_SizeDelta: {x: 208.85, y: 24.829}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1458014721
 MonoBehaviour:
@@ -3637,7 +3637,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'SFX Volume:'
 --- !u!222 &1458014722
@@ -3955,8 +3955,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -143, y: 98}
-  m_SizeDelta: {x: 257.837, y: 24.829}
+  m_AnchoredPosition: {x: -133.019, y: 93.722}
+  m_SizeDelta: {x: 277.799, y: 33.384}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1671266650
 MonoBehaviour:
@@ -3989,7 +3989,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'Master Volume:'
 --- !u!222 &1671266651
