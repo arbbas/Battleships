@@ -9,6 +9,6 @@ public class Rotator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(_rotation * _speed * Time.deltaTime);
+        transform.Rotate(_rotation * _speed * Time.deltaTime); //rotation for the ship at the main menu
     }
 }
