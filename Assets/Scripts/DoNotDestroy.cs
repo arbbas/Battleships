@@ -13,6 +13,14 @@ public class DoNotDestroy : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-        
+
+    }
+
+    public void DoNotDestroyThis()
+    {
+
+        GameObject[] sfxObject = GameObject.FindGameObjectsWithTag("sfx1");
+
+        DontDestroyOnLoad(this.gameObject);
     }
 }
