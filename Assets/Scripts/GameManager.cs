@@ -15,9 +15,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public AudioSource Laser;
 
+    public void PlayLaser()
+    {
+        Laser.Play();
+    }
 
-    [System.Serializable]
+[System.Serializable]
     public class Player
     {
         public enum PlayerType
@@ -599,10 +604,12 @@ public class GameManager : MonoBehaviour
     IEnumerator CheckCoordinate(int x, int z, TileInformation info)
     {
 
-
+          
+         
             if (isShooting)
             {
-                yield break;
+              PlayLaser();
+              yield break;
             }
             isShooting = true;
 
@@ -630,8 +637,9 @@ public class GameManager : MonoBehaviour
             //Generating the laser shot
             Vector3 targetPosition = info.gameObject.transform.position;
             Vector3 laserStartPosition = new Vector3(targetPosition.x, (targetPosition.y + 5), targetPosition.z);
-            GameObject laser = Instantiate(laserPrefab, laserStartPosition, new Quaternion(0f, 0f, 0f, 0f));
+        GameObject laser = Instantiate(laserPrefab, laserStartPosition, new Quaternion(0f, 0f, 0f, 0f));
 
+       
         /*
             //SHOOTING A ROCKET
             //the below is the start position of where the rocket will be shot from
