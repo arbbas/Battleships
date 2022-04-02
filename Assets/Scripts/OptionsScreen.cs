@@ -21,9 +21,16 @@ public class OptionsScreen : MonoBehaviour
     public Text mastLabel, musicLabel, sfxLabel;
     public Slider mastSlider, musicSlider, sfxSlider;
 
+    public GameObject ObjectMusicTrack;
+    private AudioSource AudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        ObjectMusicTrack = GameObject.FindWithTag("GameMusic");
+        AudioSource = ObjectMusicTrack.GetComponent<AudioSource>();
+
         fullscreenToggle.isOn = Screen.fullScreen;
 
         if(QualitySettings.vSyncCount == 0) //vsync off here
