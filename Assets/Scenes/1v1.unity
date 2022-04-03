@@ -9167,12 +9167,12 @@ MonoBehaviour:
     amountStart: {fileID: 404453017}
     placedAmount: 0
   - spaceshipGhost: {fileID: 2046844669}
-    spaceshipPrefab: {fileID: 5563936239598400311, guid: 0aedbe5e67126274eaf2d58e686136cb, type: 3}
+    spaceshipPrefab: {fileID: 1215282580270295150, guid: 7dd4fc95124a3614181d005c8762a277, type: 3}
     noToPlace: 1
     amountStart: {fileID: 377173363}
     placedAmount: 0
   - spaceshipGhost: {fileID: 1541115279}
-    spaceshipPrefab: {fileID: 1629196518755211292, guid: f13ab8f5ed7264b47961e822896d3384, type: 3}
+    spaceshipPrefab: {fileID: 5483833338049123641, guid: 65bfc0dccfad3c14f805cc0c1553bdeb, type: 3}
     noToPlace: 1
     amountStart: {fileID: 1771163265}
     placedAmount: 0

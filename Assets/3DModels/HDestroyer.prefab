@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccdcb4e9bbd49e54991627f22e74dc95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spaceshipLength: 0
-  type: 0
+  spaceshipLength: 2
+  type: 2
 --- !u!23 &-4239673260901262940
 MeshRenderer:
   m_ObjectHideFlags: 0
