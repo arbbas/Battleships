@@ -551,13 +551,13 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Player presses the shoot panel button. 
-    /// Their ships become visible, the panel becomes hidden and the game state changes to SHOOTING.
+    /// The panel becomes hidden and the game state changes to SHOOTING.
     /// Fin note 30/03/22 - added functionality to hide the power up button if the power up has already been used.
     /// 31/03/22 - added functionality to enable the UI to say what turn it is.
     /// </summary>
     public void ShotButton()
     {
-        UnhideAllMyShips();
+        //UnhideAllMyShips();
         players[playerTurn].shootPanel.SetActive(false);
         gameState = GameStates.SHOOTING;
 
