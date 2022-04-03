@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9152,27 +9152,27 @@ MonoBehaviour:
   readyButton: {fileID: 1118971265}
   spaceshipList:
   - spaceshipGhost: {fileID: 1474267020}
-    spaceshipPrefab: {fileID: 6910150132134936426, guid: 860a85dd427e1aa4d993a845379dfe37, type: 3}
+    spaceshipPrefab: {fileID: 3618979823512111907, guid: 4c31a82c37d5a25468b43da0baa60bf1, type: 3}
     noToPlace: 3
     amountStart: {fileID: 1467894361}
     placedAmount: 0
   - spaceshipGhost: {fileID: 1207015140}
-    spaceshipPrefab: {fileID: 1662299127458675080, guid: 5466ce5e6c6d955429873a8cda08a89b, type: 3}
+    spaceshipPrefab: {fileID: 3654427073740841776, guid: 139b7c0808153d54eac676b3562c3fed, type: 3}
     noToPlace: 1
     amountStart: {fileID: 813463322}
     placedAmount: 0
   - spaceshipGhost: {fileID: 1705494849}
-    spaceshipPrefab: {fileID: 6043911644734546795, guid: 9c42c806f88f2a249bed5b34fe48a174, type: 3}
+    spaceshipPrefab: {fileID: 5661549413164175949, guid: 88a3db7d1462ad44e864df8493add56c, type: 3}
     noToPlace: 1
     amountStart: {fileID: 404453017}
     placedAmount: 0
   - spaceshipGhost: {fileID: 2046844669}
-    spaceshipPrefab: {fileID: 859733594227720114, guid: 9079ab6e1e86ac74a894382e3f8e6d8f, type: 3}
+    spaceshipPrefab: {fileID: 6731716835655748319, guid: 06a15370dfd19694cb9af5c52da459c3, type: 3}
     noToPlace: 1
     amountStart: {fileID: 377173363}
     placedAmount: 0
   - spaceshipGhost: {fileID: 1541115279}
-    spaceshipPrefab: {fileID: 5541060683203503601, guid: 609653f44ef656d48927f60ba0de5e21, type: 3}
+    spaceshipPrefab: {fileID: 9022177425191207686, guid: 253d6398275ea3546b84314f6fae42e0, type: 3}
     noToPlace: 1
     amountStart: {fileID: 1771163265}
     placedAmount: 0
@@ -12280,7 +12280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.254517, y: 9.254517}
+  m_AnchoredPosition: {x: 9.254395, y: 9.254517}
   m_SizeDelta: {x: 92.6931, y: 330.6931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &514654092
@@ -17408,7 +17408,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.254517, y: 9.254517}
+  m_AnchoredPosition: {x: 9.254395, y: 9.254517}
   m_SizeDelta: {x: 92.6931, y: 330.6931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &724104273
@@ -19593,7 +19593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.254517, y: 9.254517}
+  m_AnchoredPosition: {x: 9.254395, y: 9.254517}
   m_SizeDelta: {x: 92.6931, y: 330.6931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &814405703
@@ -26958,7 +26958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.254517, y: 9.254517}
+  m_AnchoredPosition: {x: 9.254395, y: 9.254517}
   m_SizeDelta: {x: 92.6931, y: 330.6931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1128748440
