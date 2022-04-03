@@ -557,7 +557,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void ShotButton()
     {
-        UnhideAllMyShips();
+        //UnhideAllMyShips();
         players[playerTurn].shootPanel.SetActive(false);
         gameState = GameStates.SHOOTING;
 
