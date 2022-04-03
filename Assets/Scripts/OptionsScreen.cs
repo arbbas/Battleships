@@ -72,13 +72,15 @@ public class OptionsScreen : MonoBehaviour
             UpdateResolutionLabel();
         }
 
-        float vol = 0f; // storage of the current volume levels when the game is quit
-        mixer.GetFloat("MasterVol", out vol);
-        mastSlider.value = vol;
-        mixer.GetFloat("MusicVol", out vol);
-        musicSlider.value = vol;
-        mixer.GetFloat("SFXVol", out vol);
-        sfxSlider.value = vol;
+        float vol1 = 0f; // storage of the current volume levels when the game is quit
+        float vol2 = 0f;
+        float vol3 = 0f;
+        mixer.GetFloat("MasterVol", out vol1);
+        mastSlider.value = vol1;
+        mixer.GetFloat("MusicVol", out vol2);
+        musicSlider.value = vol2;
+        mixer.GetFloat("SFXVol", out vol3);
+        sfxSlider.value = vol3;
 
         mastLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString(); // to change master label
 
