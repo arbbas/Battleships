@@ -236,8 +236,9 @@ public class PlaceManager : MonoBehaviour
     // Deploys spaceship on grid
     void DeploySpaceship()
     {
+        // HARRY TEST
         // Takes current hitpoint and rounds vector to position
-        Vector3 position = new Vector3(Mathf.Round(hitPoint.x), 0, Mathf.Round(hitPoint.z));
+        Vector3 position = new Vector3(Mathf.Round(hitPoint.x), 0.3f, Mathf.Round(hitPoint.z) + 0.5f);
         Quaternion rotation = spaceshipList[currentSpaceship].spaceshipGhost.transform.rotation;
         GameObject nuShip = Instantiate(spaceshipList[currentSpaceship].spaceshipPrefab, position, rotation);
 
