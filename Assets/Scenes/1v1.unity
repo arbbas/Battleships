@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9152,27 +9152,27 @@ MonoBehaviour:
   readyButton: {fileID: 1118971265}
   spaceshipList:
   - spaceshipGhost: {fileID: 1474267020}
-    spaceshipPrefab: {fileID: 6910150132134936426, guid: 860a85dd427e1aa4d993a845379dfe37, type: 3}
+    spaceshipPrefab: {fileID: 5009285728583286699, guid: 5ef55de50664274439cfd500635c04dc, type: 3}
     noToPlace: 3
     amountStart: {fileID: 1467894361}
     placedAmount: 0
   - spaceshipGhost: {fileID: 1207015140}
-    spaceshipPrefab: {fileID: 1662299127458675080, guid: 5466ce5e6c6d955429873a8cda08a89b, type: 3}
+    spaceshipPrefab: {fileID: 4871991774595693916, guid: 96f01d32e7642b6409146f506016e5e2, type: 3}
     noToPlace: 1
     amountStart: {fileID: 813463322}
     placedAmount: 0
   - spaceshipGhost: {fileID: 1705494849}
-    spaceshipPrefab: {fileID: 6043911644734546795, guid: 9c42c806f88f2a249bed5b34fe48a174, type: 3}
+    spaceshipPrefab: {fileID: 4817051825448054412, guid: eabcc570d9762b44a89f62651d8a3254, type: 3}
     noToPlace: 1
     amountStart: {fileID: 404453017}
     placedAmount: 0
   - spaceshipGhost: {fileID: 2046844669}
-    spaceshipPrefab: {fileID: 859733594227720114, guid: 9079ab6e1e86ac74a894382e3f8e6d8f, type: 3}
+    spaceshipPrefab: {fileID: 5563936239598400311, guid: 0aedbe5e67126274eaf2d58e686136cb, type: 3}
     noToPlace: 1
     amountStart: {fileID: 377173363}
     placedAmount: 0
   - spaceshipGhost: {fileID: 1541115279}
-    spaceshipPrefab: {fileID: 5541060683203503601, guid: 609653f44ef656d48927f60ba0de5e21, type: 3}
+    spaceshipPrefab: {fileID: 1629196518755211292, guid: f13ab8f5ed7264b47961e822896d3384, type: 3}
     noToPlace: 1
     amountStart: {fileID: 1771163265}
     placedAmount: 0
