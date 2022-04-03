@@ -24,14 +24,20 @@ public class OptionsScreen : MonoBehaviour
     public GameObject ObjectMusicTrack;
     private AudioSource AudioSource;
 
+    public GameObject ObjectStartSFX;
+    private AudioSource audioSource2;
+
     // Start is called before the first frame update
     void Start()
     {
 
-        ObjectMusicTrack = GameObject.FindWithTag("GameMusic");
+        ObjectMusicTrack = GameObject.FindWithTag("GameMusic"); // make sure that the music isn't stopped as we navigate around the game
         AudioSource = ObjectMusicTrack.GetComponent<AudioSource>();
 
-        fullscreenToggle.isOn = Screen.fullScreen;
+        ObjectStartSFX = GameObject.FindWithTag("sfx1");
+        audioSource2 = ObjectStartSFX.GetComponent<AudioSource>();
+
+        fullscreenToggle.isOn = Screen.fullScreen; // fullscreen checker
 
         if(QualitySettings.vSyncCount == 0) //vsync off here
         {
@@ -66,19 +72,21 @@ public class OptionsScreen : MonoBehaviour
             UpdateResolutionLabel();
         }
 
-        float vol = 0f;
-        mixer.GetFloat("MasterVol", out vol);
-        mastSlider.value = vol;
-        mixer.GetFloat("MusicVol", out vol);
-        musicSlider.value = vol;
-        mixer.GetFloat("SFXVol", out vol);
-        sfxSlider.value = vol;
+        float vol1 = 0f; // storage of the current volume levels when the game is quit
+        float vol2 = 0f;
+        float vol3 = 0f;
+        mixer.GetFloat("MasterVol", out vol1);
+        mastSlider.value = vol1;
+        mixer.GetFloat("MusicVol", out vol2);
+        musicSlider.value = vol2;
+        mixer.GetFloat("SFXVol", out vol3);
+        sfxSlider.value = vol3;
 
-        mastLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString();
+        mastLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString(); // to change master label
 
-        musicLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString();
+        musicLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString(); // to change music label
 
-        sfxLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString();
+        sfxLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString(); // to change sfx label
 
     }
 
@@ -128,6 +136,9 @@ public class OptionsScreen : MonoBehaviour
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenToggle.isOn); // changes res and fullscreen when apply clicked
     }
 
+    /// <summary>
+    /// Method to set the master volume using the UI slider
+    /// </summary>
     public void SetMasterVolume()
     {
         mastLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString();
@@ -137,6 +148,9 @@ public class OptionsScreen : MonoBehaviour
         PlayerPrefs.SetFloat("MasterVol", mastSlider.value);
     }
 
+    /// <summary>
+    /// Method to set the music volume
+    /// </summary>
     public void SetMusicVolume()
     {
         musicLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString();
@@ -146,7 +160,9 @@ public class OptionsScreen : MonoBehaviour
         PlayerPrefs.SetFloat("MusicVol", musicSlider.value);
     }
 
-
+    /// <summary>
+    /// Method to set the SFX volume
+    /// </summary>
     public void SetSFXVolume()
     {
         sfxLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString();
@@ -157,6 +173,9 @@ public class OptionsScreen : MonoBehaviour
     }
 }
 
+/// <summary>
+/// resolution values for the menus
+/// </summary>
 [System.Serializable]
 public class ResItem
 {
