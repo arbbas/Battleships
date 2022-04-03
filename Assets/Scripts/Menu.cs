@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     public GameObject optionsScreen;
-    public GameObject Battleshipmainmenu;
+    public GameObject CarrierMainMenu;
    
     public void RestartGame()
     {
@@ -21,21 +21,21 @@ public class Menu : MonoBehaviour
     public void LoadGame(string sceneLoad)
     {
         SceneManager.LoadScene(sceneLoad);
-        Battleshipmainmenu.SetActive(false);
+        CarrierMainMenu.SetActive(false);
 
     }
 
     public void OpenOptions()
     {
         optionsScreen.SetActive(true);
-        Battleshipmainmenu.SetActive(false);
+        CarrierMainMenu.SetActive(false);
         
     }
 
     public void CloseOptions()
     {
         optionsScreen.SetActive(false);
-        Battleshipmainmenu.SetActive(true);
+        CarrierMainMenu.SetActive(true);
 
     }
 
