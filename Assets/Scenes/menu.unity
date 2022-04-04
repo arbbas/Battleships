@@ -3147,7 +3147,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1762366692}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: OpenTutorial
+        m_MethodName: LoadTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
