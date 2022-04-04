@@ -25,6 +25,16 @@ public class Menu : MonoBehaviour
 
     }
 
+      public void LoadTutorial()
+    {
+        SceneManager.LoadScene("TutorialScene");
+    }
+
+       public void LoadMenu()
+    {
+        SceneManager.LoadScene("menu");
+    }
+
     public void OpenOptions()
     {
         optionsScreen.SetActive(true);
