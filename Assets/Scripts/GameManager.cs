@@ -699,6 +699,7 @@ public class GameManager : MonoBehaviour
                 print("You Win!");
                 P1ShotCountUI.SetActive(false);
                 P2ShotCountUI.SetActive(false);
+                 yield return new WaitForSeconds(3);
 
                 players[playerTurn].WinPanels.SetActive(true);
                 yield break;
